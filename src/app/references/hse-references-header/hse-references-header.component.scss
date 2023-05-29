@@ -1,0 +1,38 @@
+@import "src/styles/variables";
+
+:host {
+  height: 100%;
+  background-color: $color-grey-morn-5;
+  overflow-x: auto;
+}
+
+.references-header {
+  margin-bottom: 32px;
+  background-color: $color-base-white;
+  padding: 1rem 3rem;
+  border-bottom: 1px solid $color-grey-morn-2;
+
+  .references-title {
+    margin-bottom: 24px;
+    color: $color-base-black;
+    font-family: $hse-font-family-alt-lt;
+    font-size: 24px;
+    font-weight: 600;
+  }
+}
+
+.references-filters {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.references-filter {
+  background-color: $color-grey-morn-3;
+  height: 44px;
+}
+
+.references-filter.active {
+  color: $color-brand-1;
+  border-color: $color-brand-1;
+}

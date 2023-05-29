@@ -1,0 +1,19 @@
+<div class="references-header">
+  <div class="references-title" *ngIf="isMainReferences">{{ 'REFERENCES.REFERENCES_MAIN' | translate }}</div>
+  <div class="references-title" *ngIf="!isMainReferences">{{ 'REFERENCES.REFERENCES_DIGITAL' | translate }}</div>
+    <div *ngIf="isMainReferences" class="references-filters">
+      <button class="btn btn-secondary references-filter"
+              routerLink="/references/main/tags"
+              routerLinkActive="active">{{ 'REFERENCES.TAGS' | translate }}</button>
+
+      <button class="btn btn-secondary references-filter"
+              routerLink="/references/main/prerequisites"
+              routerLinkActive="active">{{ 'REFERENCES.PREREQUISITES' | translate }}</button>
+    </div>
+    <div *ngIf="!isMainReferences" class="references-filters">
+      <button class="btn btn-secondary references-filter"
+              *ngFor="let tool of digitalTools"
+              routerLink="/references/digital_tools/{{ tool.key | lowercase }}"
+              routerLinkActive="active">{{ 'REFERENCES.'+tool.key | translate }}</button>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="hse-dialog-container">
+  <button class="close-container" (click)="closeDialog()">
+    <hse-icon name="close"></hse-icon>
+  </button>
+  <div class="hse-dialog-container-top">
+    <div class="hse-dialog-title">{{data.name | localizedString}}</div>
+    <div class="hse-dialog-body">
+      <div>{{data.desc | localizedString}}</div>
+    </div>
+    <div>
+      <div class="hse-input-label">Комментарий</div>
+      <hse-input formControlName="ru"></hse-input>
+    </div>
+    <div class="hse-dialog-container-bottom">
+      <button class="btn btn-primary" (click)="closeDialog()">{{'BUTTONS.ADD_APPLICATION' | translate}}</button>
+      <button class="btn btn-secondary" (click)="closeDialog()">{{'BUTTONS.CANCEL' | translate}}</button>
+    </div>
+  </div>
+</div>

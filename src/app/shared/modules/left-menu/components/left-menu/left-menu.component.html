@@ -1,0 +1,91 @@
+<div class="lm-fake-col"></div>
+<div class="lm-backdrop"
+     [class.lm-backdrop_open]="menuIsOpen"
+     (click)="toggleMenu()"></div>
+
+
+<div class="lm-menu fx"
+[class.lm-menu_opened]="menuIsOpen">
+  <!-- First column start -->
+  <div class="lm-col">
+    <div class="lm-item lm-item_left lm-item_bottom-indent"
+         [class.lm-item_hover]="currentHoverId === menuIteIds.COLLAPSE"
+         (mouseenter)="mouseEnter($event, menuIteIds.COLLAPSE)"
+         (mouseleave)="mouseLeave($event)"
+         (click)="toggleMenu()">
+      <hse-icon name="arrow-keyboard-right"
+                    class="lm-item__icon lm-item__icon_collapse"
+                    [class.lm-item__icon_right]="!menuIsOpen"></hse-icon>
+    </div>
+
+    <a *ngFor="let item of (firstBlockMenu | leftMenuFilter)"
+       class="lm-item lm-item_left"
+       [class.lm-item_hover]="currentHoverId === item.id"
+       [title]="item.nameKey | translate"
+       [routerLink]="item.link"
+       routerLinkActive="lm-item_active"
+       [routerLinkActiveOptions]="{ exact: item.linkOptions }"
+       (mouseenter)="mouseEnter($event, item.id)"
+       (mouseleave)="mouseLeave($event)">
+      <hse-icon [name]="item.icon"
+                    class="lm-item__icon"></hse-icon>
+    </a>
+  </div>
+  <!-- First column end -->
+
+  <!-- Second column start -->
+  <div class="lm-col"
+       [class.lm-col_closed]="!menuIsOpen">
+
+    <div class="lm-item lm-item_right lm-item_bottom-indent"
+         [class.lm-item_hover]="currentHoverId === menuIteIds.COLLAPSE"
+         (mouseenter)="mouseEnter($event, menuIteIds.COLLAPSE)"
+         (mouseleave)="mouseLeave($event)"
+         (click)="toggleMenu()">
+      <div class="lm-item__label">{{ 'COMMON.ROLL_UP' | translate }}</div>
+    </div>
+
+    <ng-container *ngFor="let item of (firstBlockMenu | leftMenuFilter)">
+      <a *ngIf="!item.subLinks"
+        class="lm-item lm-item_right"
+        [class.lm-item_hover]="currentHoverId === item.id"
+        [routerLink]="item.link"
+        routerLinkActive="lm-item_active"
+        [routerLinkActiveOptions]="{ exact: item.linkOptions }"
+        (mouseenter)="mouseEnter($event, item.id)"
+        (mouseleave)="mouseLeave($event)">
+        <div class="lm-item__label">{{ item.nameKey | translate }}</div>
+      </a>
+      <mat-expansion-panel
+        *ngIf="item.subLinks"
+        (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false"
+        [class.lm-item_hover]="currentHoverId === item.id"
+        (mouseenter)="mouseEnter($event, item.id)"
+        (mouseleave)="mouseLeave($event)"
+        class="sublinks-container">
+        <mat-expansion-panel-header class="lm-item lm-item_right">
+          <mat-panel-title class="panel-title">
+            <div class="lm-item__label">{{ item.nameKey | translate }}</div>
+            <hse-icon name="arrow-dropdown"></hse-icon>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <a *ngFor="let subLink of (item.subLinks | leftMenuFilter)"
+           class="lm-item lm-item_right pad-right"
+           [class.lm-item_hover]="currentHoverId === item.id"
+           [routerLink]="subLink.link"
+           routerLinkActive="lm-item_active"
+           [routerLinkActiveOptions]="{ exact: subLink.linkOptions }"
+           (mouseenter)="mouseEnter($event, subLink.id)"
+           (mouseleave)="mouseLeave($event)">
+          <div class="lm-item__label">{{ subLink.nameKey | translate }}</div>
+        </a>
+      </mat-expansion-panel>
+    </ng-container>
+
+  </div>
+  <!-- Second column end -->
+</div>
+
+
+

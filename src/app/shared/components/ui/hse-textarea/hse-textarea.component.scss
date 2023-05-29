@@ -1,0 +1,90 @@
+@import "variables";
+
+:host {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+}
+
+.hse-textarea__container {
+  box-sizing: border-box;
+  width: 100%;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.hse-textarea__label {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    .hse-textarea__textarea:not(:focus):not([disabled]) {
+      border-color: $color-brand-3;
+    }
+  }
+}
+
+.hse-textarea__textarea {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 681px;
+  resize: vertical;
+  min-height: 80px;
+  max-height: 320px;
+  padding: 8px 16px;
+  border: 1px solid $color-grey-morn-1;
+  outline: none;
+  font-size: 16px;
+  font-family: $hse-font-family;
+  line-height: 1.5;
+  color: #1d1d1b;
+  border-radius: 4px;
+  transition: border-color .3s ease;
+
+  //&::placeholder {
+  //  color: #1d1d1b;
+  //}
+
+  &:focus {
+    border-color: $color-brand-1;
+  }
+
+  &:focus + .hse-textarea__extra-button {
+    display: none;
+  }
+
+  &:disabled {
+    background-color: $color-grey-morn-3;
+  }
+}
+
+.hse-textarea__textarea_size_small {
+  height: 40px;
+  line-height: calc(22/16);
+}
+
+.hse-textarea__textarea_rounded {
+  border-radius: 4px;
+}
+
+// подсветка инпута при возникновении ошибок в форме
+:host.ng-invalid.ng-touched {
+  .hse-textarea__textarea {
+    border-color:  $color-system-error-dark;
+
+    &:hover {
+      border-color: $color-system-error-1;
+    }
+  }
+}
+
+@media (max-width: 1280px) {
+  .hse-textarea__textarea {
+    height: 40px;
+    font-size: 14px;
+  }
+}

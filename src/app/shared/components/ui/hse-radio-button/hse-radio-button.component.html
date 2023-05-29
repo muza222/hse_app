@@ -1,0 +1,15 @@
+<div class="radio-button max-width"
+     [class.radio-button__square]="square"
+     [class.radio-button__small]="small">
+  <input type="radio"
+         id="radio-{{ radioButtonId }}"
+         [value]="value"
+         [name]="name"
+         [(ngModel)]="model"
+         [disabled]="disabled">
+
+  <label for="radio-{{ radioButtonId }}"
+         class="fx v-center max-width">
+    <ng-content></ng-content>
+  </label>
+</div>

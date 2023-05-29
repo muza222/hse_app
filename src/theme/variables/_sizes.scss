@@ -1,0 +1,20 @@
+$border-radius-lg: 12px;
+$border-radius-md: 8px;
+$border-radius-sm: 4px;
+
+$control-sizes: (
+  "lg": 3rem,
+  "md": 2.5rem,
+  "sm": 2rem
+);
+
+$offsets: (
+  "sm": 0.75rem,
+  "md": 1.5rem,
+  "lg": 2.25rem
+);
+
+//
+// page content sizes
+//
+$content-padding: 2rem 3rem;

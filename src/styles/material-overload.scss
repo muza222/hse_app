@@ -1,0 +1,31 @@
+@import "variables";
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: $color-brand-1;
+}
+
+.mat-tab-body-wrapper {
+  margin-top: 32px;
+}
+
+.mat-tab-label {
+  opacity: 1!important;
+
+  &:hover {
+    .mat-tab-label-content span:not(.label_error){
+      color: $color-brand-2;
+    }
+  }
+}
+
+.mat-tab-label-content span{
+  font-family: $hse-font-family-alt;
+  font-weight: 600;
+  font-size: 16px;
+  color: $color-grey-dusk-1;
+  transition: color .3s ease;
+}
+
+.mat-tab-label-active span{
+  color: $color-brand-1;
+}

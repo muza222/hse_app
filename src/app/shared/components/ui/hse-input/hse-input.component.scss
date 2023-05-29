@@ -1,0 +1,159 @@
+@import "variables";
+
+:host {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+}
+
+.hse-input__container {
+  box-sizing: border-box;
+  width: 100%;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.hse-input__label {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    .hse-input__input:not(:focus):not([disabled]) {
+      border-color: $color-brand-3;
+    }
+  }
+}
+
+.hse-input__input {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  padding: 8px 16px;
+  border: 1px solid $color-grey-morn-1;
+  outline: none;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1d1d1b;
+  border-radius: 4px;
+  font-family: $hse-font-family;
+  transition: border-color .3s ease;
+
+  //&::placeholder {
+  //  color: #1d1d1b;
+  //}
+
+  &:focus {
+    border-color: $color-brand-1;
+  }
+
+  &:focus + .hse-input__extra-button {
+    display: none;
+  }
+
+  &:disabled {
+    background-color: $color-grey-morn-3;
+  }
+}
+
+.hse-input__input_size_small {
+  height: 40px;
+  line-height: calc(22/16);
+}
+
+.hse-input__input_rounded {
+  border-radius: 4px;
+}
+
+.hse-input__extra-button {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  height: 20px;
+  padding: 4px;
+  margin: 0;
+  border: none;
+  background: transparent;
+  transform: translateY(-50%);
+  outline: none;
+  color: #4f5dfc;
+  font-size: 12px;
+  line-height: 1;
+
+  &:hover {
+    opacity: 0.85;
+    cursor: pointer;
+  }
+}
+
+.hse-input-search {
+  position: relative;
+  padding: 12px 48px 12px 12px;
+  min-width: 550px;
+}
+
+.btn-search-button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  height: unset !important;
+  position: absolute;
+  right: 16px;
+  background-color: transparent;
+  color: $color-grey-dusk-1;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-brand-1;
+  }
+}
+
+.hse-input__visibility-button {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  margin: 0;
+  border: none;
+  background: transparent;
+  transform: translateY(-50%);
+  outline: none;
+  color: #A6A8AB;
+
+  &:hover {
+    opacity: 0.85;
+    cursor: pointer;
+  }
+}
+
+.hse-input__visibility-icon {
+  width: 24px;
+  height: 16px;
+  min-width: 24px;
+  min-height: 16px;
+}
+
+// подсветка инпута при возникновении ошибок в форме
+:host.ng-invalid.ng-touched {
+  .hse-input__input {
+    border-color: $color-system-error-dark;
+
+    &:hover {
+      border-color: $color-system-error-1;
+    }
+  }
+}
+
+@media (max-width: 1280px) {
+  .hse-input__input {
+    height: 40px;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,89 @@
+<div class="all-applications-header">
+    <div class="all-applications-header-top">
+        <div class="all-applications-title">{{ 'LEFT_MENU.MY_APPLICATIONS' | translate}}</div>
+<!--        <div class="all-applications-buttons">-->
+<!--            <button class="btn btn-primary btn-xlarge btn-enabled">Подать новую заявку</button>-->
+<!--        </div>-->
+    </div>
+    <div class="all-applications-header-actions">
+        <ng-template [hseIsAuth]="false">
+            <div class="showcase-filter">
+                <div class="showcase-filter-title">{{ 'COMMON.SHOW_RELEVANT' | translate}}</div>
+                <mat-slide-toggle class="showcase-filter-toggle"></mat-slide-toggle>
+            </div>
+        </ng-template>
+        <button class="btn btn-transparent btn-filter" (click)="openFilters()">
+            <hse-icon name="filter"></hse-icon>
+        </button>
+    </div>
+</div>
+
+<div class="all-applications-layout">
+    <div class="table-wrap">
+        <div class="table-inner">
+            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+                   class="all-applications-table" tableScroll>
+                <!-- Date Column -->
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by date">
+                        {{ 'APPLICATION.DATE' | translate }}
+                    </th> <!-- {{element.name | localizedString}} -->
+                    <td mat-cell *matCellDef="let element">{{formatDate(element.date, 'dd MMMM yyyy г., hh:mm', 'en-EN')}}</td>
+                </ng-container>
+
+                <!-- Type Column -->
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef>
+                        {{ 'APPLICATION.TYPE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">  {{element.name | localizedString}} </td>
+                </ng-container>
+
+                <!-- Number Column -->
+                <ng-container matColumnDef="number">
+                    <th mat-header-cell *matHeaderCellDef>
+                        №
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.hint}}</td>
+                </ng-container>
+
+                <!-- Executor Column -->
+                <ng-container matColumnDef="executor">
+                    <th mat-header-cell *matHeaderCellDef>
+                        {{ 'APPLICATION.EXECUTOR' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.executor}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="applicant" *ngIf="sessionStore.getSession().activeRole.name === UserType.SUPERVISOR">
+                    <th mat-header-cell *matHeaderCellDef>
+                        {{ 'ROLES.STUDENT' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.applicant}}</td>
+                </ng-container>
+
+                <!-- Last changed Column -->
+                <ng-container matColumnDef="lastChanged">
+                    <th mat-header-cell *matHeaderCellDef>
+                        {{ 'APPLICATION.LAST_CHANGED' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.mask}}</td>
+                </ng-container>
+
+                <!-- Status Column -->
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef>
+                        {{ 'APPLICATION.STATUS' | translate }}
+                    </th>
+                    <!-- {{element.status | localizedString}} -->
+                    <td mat-cell *matCellDef="let element">
+                        <app-application-status [status]=element.status> </app-application-status>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getRecord(row)"></tr>
+            </table>
+        </div>
+    </div>
+</div>

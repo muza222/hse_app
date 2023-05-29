@@ -1,0 +1,32 @@
+@import "variables";
+
+.footer-container {
+  max-width: 1632px;
+  margin: 0 auto;
+  padding: 28px 16px;
+  position: static;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy {
+  font-family: $hse-font-family-alt-lt;
+  font-size: 1.125em;
+  font-weight: 600;
+  line-height: 1.5rem;
+  color: $color-base-white;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 72px;
+  }
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-links__item {
+  color: $color-transparent-white;
+}

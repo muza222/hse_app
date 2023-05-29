@@ -1,0 +1,22 @@
+<div class="hse-dialog-container">
+  <button class="close-container" (click)="closeDialog()">
+    <hse-icon name="close"></hse-icon>
+  </button>
+  <div class="hse-dialog-container-top">
+    <div class="hse-dialog-title">{{data.words.header}} элемента справочника</div>
+    <form [formGroup]="addPrerequisiteForm">
+      <div>
+        <div class="hse-input-label">Формулировка пререквизита на русском языке*</div>
+        <hse-input formControlName="ru"></hse-input>
+      </div>
+      <div>
+        <div class="hse-input-label">Формулировка пререквизита на английском языке*</div>
+        <hse-input formControlName="en"></hse-input>
+      </div>
+    </form>
+  </div>
+  <div class="hse-dialog-container-bottom">
+    <button class="btn btn-primary" (click)="sendPrerequisite()">{{data.words.button}}</button>
+    <button class="btn btn-secondary" (click)="closeDialog()">Отмена</button>
+  </div>
+</div>

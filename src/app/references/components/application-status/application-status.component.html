@@ -1,0 +1,8 @@
+<div class="status-card" [ngStyle]="{backgroundColor: getColor()}">
+    <ng-container [ngSwitch]="status">
+        <ng-container i18n *ngSwitchCase="EppStatus.CANCELLED">{{ 'STATUS.CANCELLED' | translate }}</ng-container>
+        <ng-container i18n *ngSwitchCase="EppStatus.DONE">{{ 'STATUS.DONE' | translate }}</ng-container>
+        <ng-container i18n *ngSwitchCase="EppStatus.WAITING">{{ 'STATUS.WAITING' | translate }}</ng-container>
+        <ng-container i18n *ngSwitchDefault>not defined</ng-container>
+    </ng-container>
+</div>

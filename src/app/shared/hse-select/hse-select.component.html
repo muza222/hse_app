@@ -1,0 +1,88 @@
+<div *ngIf="!disabled"
+     class="hse-select"
+     [class.hse-select_redesigned]="redesigned"
+     [ngClass]="customClass">
+
+  <div role="button"
+       [tabIndex]="tabIndex"
+       [matMenuTriggerFor]="menu"
+       #notDisabled
+       [ngClass]="getHeaderClasses(false)"
+       [ngStyle]="customStyle"
+       [style.width]="width"
+       (focus)="emitFocusEvent()"
+       (blur)="emitBlurEvent()"
+       (menuClosed)="optionListClosed()"
+       (menuOpened)="optionListOpened()">
+
+    <div [style.width]="width"
+         *ngIf="!selected && !withInput"
+         [ngClass]="getPlaceholderContainerClass()">
+          <span [ngClass]="getPlaceholderClass()">
+            {{placeholder}}
+          </span>
+    </div>
+    <span *ngIf="selected && withPlaceholder" [ngClass]="getPlaceholderClass()">{{placeholder}}</span>
+    <span *ngIf="!selected && !nullText && !withInput" class="hse-select-span"></span>
+    <span *ngIf="!withInput && (selected || nullText)" class="hse-select-span">
+          {{ selectedName || nullText }}
+      </span>
+
+    <input *ngIf="withInput"
+           [placeholder]="placeholder"
+           #inputElement
+           class="select-input"
+           [(ngModel)]="inputValue"
+           (ngModelChange)="changeInputValue($event)">
+
+    <hse-icon name="arrow-dropdown" class="select-arrow"></hse-icon>
+
+  </div>
+
+  <mat-menu #menu="matMenu"
+            tabindex="-1"
+            [overlapTrigger]="false"
+            [xPosition]="xPos"
+            [yPosition]="yPos"
+            [class]="redesigned ? 'hse-select-options-list_redesigned' : ''">
+    <div class="hse-select-content-options-list"
+         [style.width]="equalWidth ? dropDownWidth : 'auto'">
+      <div *ngIf="nullText"
+           mat-menu-item
+           (click)="changeValue(null)"
+           [ngClass]="getItemClass(null)">
+        <span class="hse-select-span">{{nullText}}</span>
+      </div>
+      <div mat-menu-item
+           *ngFor="let item of filteredCollection"
+           (click)="changeValue(item[idField])"
+           [ngClass]="getItemClass(item)"
+           [class.menu-row_redesigned]="redesigned"
+           [class.hse-custom-template]="optionTpl">
+        <ng-template *ngTemplateOutlet="optionTpl; context: {$implicit: item}"></ng-template>
+        <hse-icon *ngIf="!redesigned" [name]="'check'" class="item-checked"></hse-icon>
+        <hse-icon *ngIf="!!redesigned" [name]="'check-default'" class="item-checked"></hse-icon>
+        <span *ngIf="!optionTpl" class="hse-select-span" [title]="item[nameField]">{{item[nameField]}}</span>
+      </div>
+    </div>
+  </mat-menu>
+</div>
+
+<div *ngIf="disabled" class="hse-select" [ngClass]="customClass">
+  <div [style.width]="width"
+       [ngClass]="getHeaderClasses(true)">
+    <div *ngIf="!selected"
+         [style.width]="width"
+         class="hse-select-label-container">
+        <span [ngClass]="getPlaceholderClass()">
+          {{placeholder}}
+        </span>
+    </div>
+    <span *ngIf="!selected && !nullText" class="hse-select-span">
+      </span>
+    <span *ngIf="selected || nullText" class="hse-select-span">
+        {{ selectedName || nullText }}
+      </span>
+    <hse-icon [name]="'selectArrowBold'" class="select-arrow"></hse-icon>
+  </div>
+</div>

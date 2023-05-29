@@ -1,0 +1,40 @@
+<div class="my-epp-header">
+  <div class="my-epp-header-top">
+    <div class="showcase-title">{{ 'LEFT_MENU.ALL_APPLICATIONS' | translate}}</div>
+  </div>
+</div>
+
+<div class="showcase-search">
+  <hse-input style="width: 50%"
+        [search]="true"
+        [placeholder]="'Поиск по наименованию'"></hse-input>
+</div>
+
+<div class="showcase-layout">
+  <div class="fair-layout">
+    <div class="fair-container">
+      <div class="fair-card" *ngFor="let eppItem of eppList">
+
+        <div class="card-container" (click)="open($event, eppItem)">
+          <div class="float-layout">
+            <div class="card-image">
+              <img ngSrc="../../../assets/images/example.png" style="border-radius: 12px;" height="80" width="80">
+              <div class="card">
+                <div class="card-title">{{ eppItem.name | localizedString }}</div>
+                <div class="card-desc">
+                  {{ eppItem.description | localizedString }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fair-pagination">
+      <hse-pagination
+        [totalPages]="15" [page]="1" [perPage]="1">
+      </hse-pagination>
+    </div>
+  </div>
+</div>

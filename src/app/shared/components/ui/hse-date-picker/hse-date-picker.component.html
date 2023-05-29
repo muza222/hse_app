@@ -1,0 +1,15 @@
+<div class="date-picker-container" [class.disabled]="disabled">
+  <input
+    [min]="minDate"
+    [max]="maxDate"
+    [matDatepicker]="picker"
+    (dateChange)="dateChange($event)"
+    [(ngModel)]="modelValue"
+    [disabled]="disabled"
+  >
+  <mat-datepicker-toggle  [for]="picker">
+    <hse-icon matDatepickerToggleIcon name="calendar"></hse-icon>
+  </mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</div>
+

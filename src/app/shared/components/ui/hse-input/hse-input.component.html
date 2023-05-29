@@ -1,0 +1,42 @@
+<div class="hse-input__container" [style.width.px]="width">
+  <label for="{{inputId}}" class="hse-input__label">
+    <input id="{{inputId}}"
+           #input
+           class="hse-input__input"
+           [class.hse-input__input_size_small]="small"
+           [class.hse-input__input_rounded]="rounded"
+           [class.hse-input-search]="search"
+           [autocomplete]="enabledAutocomplete ? 'on' : 'new-password'"
+           [(ngModel)]="model"
+           [step]="type === 'time' && step"
+           [type]="showPassword ? 'text' : type"
+           [mask]="mask || ''"
+           [prefix]="maskPrefix || ''"
+           [dropSpecialCharacters]="dropSpecialCharacters"
+           [tabIndex]="tabIndex"
+           (focus)="emitFocusEvent()"
+           (blur)="emitBlurEvent()"
+           [disabled]="disabled"
+           [placeholder]="placeholder">
+
+    <button *ngIf="!!extraButtonTitle && !isTypePassword"
+            (click)="onClickExtraButton($event)"
+            title="{{extraButtonTitle}}"
+            class="hse-input__extra-button">{{extraButtonTitle}}</button>
+
+    <button *ngIf="search"
+            class="btn-search-button">
+            <hse-icon name="search"></hse-icon>
+    </button>
+
+    <button *ngIf="isTypePassword"
+            (mousedown)="showInputValue(true)"
+            (mouseup)="showInputValue(false)"
+            (touchstart)="showInputValue(true)"
+            (touchend)="showInputValue(false)"
+            type="button"
+            class="hse-input__visibility-button">
+      <hse-icon name="eye-2" class="hse-input__visibility-icon"></hse-icon>
+    </button>
+  </label>
+</div>

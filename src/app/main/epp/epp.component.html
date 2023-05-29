@@ -1,0 +1,241 @@
+<div class="fx column header">
+    <div class="epp-actions">
+        <div class="fx gap16">
+            <a
+                class="btn btn-secondary btn-large btn-with-icon h-center v-center"
+                routerLink="/all-applications"
+            >
+                <hse-icon class="fx" name="arrow-left"></hse-icon>
+                Назад
+            </a>
+        </div>
+
+        <div>
+            <button class="btn btn-secondary btn-large" (click)="save()">Сохранить</button>
+        </div>
+
+        <div
+            *ngIf="epp?.data['epp_status'] === 'DRAFT' || epp?.data['epp_status'] === 'REWORK'"
+            class="fx gap16"
+        >
+            <button class="btn btn-secondary btn-large" (click)="save()">Сохранить</button>
+            <button class="btn btn-secondary btn-large" (click)="deleteDraft(epp)">Удалить черновик</button>
+            <button class="btn btn-secondary btn-large" (click)="updateStatus('review')">
+                Отправить на согласование
+            </button>
+        </div>
+
+        <div *ngIf="epp?.data['epp_status'] === 'REVIEW_MANAGER_EPP' && showLeadersButtons" class="fx gap16">
+            <button class="btn btn-secondary btn-large" (click)="save()">Сохранить</button>
+            <button class="btn btn-secondary btn-large" (click)="updateStatus('review')">
+                Отправить на согласование
+            </button>
+            <!-- //todo на доработку - 1.если инициатор != руководителю 2.статус REWORK-->
+            <button *ngIf="isLeader" class="btn btn-secondary btn-large" (click)="updateStatus('rework')">
+                На доработку
+            </button>
+        </div>
+
+        <div
+            *ngIf="
+                epp?.data['epp_status'] === 'REVIEW_SUPERVISOR' &&
+                this.sessionStore.session.activeRole.name === 'SUPERVISOR'
+            "
+            class="fx gap16"
+        >
+            <button class="btn btn-secondary btn-large" (click)="save()">Сохранить</button>
+            <button class="btn btn-secondary btn-large" (click)="updateStatus('review')">Согласовать</button>
+            <button class="btn btn-secondary btn-large" (click)="updateStatus('rework')">На доработку</button>
+        </div>
+
+        <div
+            *ngIf="
+                epp?.data['epp_status'] === 'REVIEW_MANAGER_FACULTY'
+            "
+            class="fx gap16"
+        >
+            <button class="btn btn-secondary btn-large" (click)="updateStatus('review')">Согласовать</button>
+            <button class="btn btn-secondary btn-large" (click)="updateStatus('rework')">На доработку</button>
+        </div>
+
+        <div
+            *ngIf="
+                epp?.data['epp_status'] === 'REVIEW_MANAGER_PROGRAM'
+            "
+            class="fx gap16"
+        >
+            <button class="btn btn-secondary btn-large" (click)="updateStatus('review')">Согласовать</button>
+            <button class="btn btn-secondary btn-large" (click)="updateStatus('rework')">Отклонить</button>
+        </div>
+
+        <div
+            *ngIf="epp?.data['epp_status'] === 'READY_FOR_PUBLICATION' && showLeadersButtons"
+            class="fx gap16"
+        >
+            <button class="btn btn-secondary btn-large" (click)="updateStatus('review')">
+                Опубликовать на Ярмарке
+            </button>
+            <button class="btn btn-secondary btn-large" (click)="updateStatus('rework')">
+                Буду дорабатывать
+            </button>
+        </div>
+    </div>
+
+    <div class="fx h-center">
+        <!-- <mat-tab-group *ngIf="template"> -->
+        <form *ngIf="template" [formGroup]="templateForm">
+            <h1>{{ template.name | localizedString }}</h1>
+            <div *ngFor="let section of template.sections" [formGroupName]="section.code">
+                <ng-template mat-tab-label>
+                    <span
+                        class="tab-label"
+                        [ngClass]="{
+                            label_error:
+                                templateForm.controls[section.code].status === 'INVALID' &&
+                                isInvalidFormControls
+                        }"
+                        >{{ section.name | localizedString }}</span
+                    >
+                    <hse-icon
+                        class="ml8"
+                        *ngIf="
+                            templateForm.controls[section.code].status === 'INVALID' && isInvalidFormControls
+                        "
+                        name="tab-alert"
+                    ></hse-icon>
+                </ng-template>
+                <div
+                    *ngFor="let subSection of section.subsections; let last = last"
+                    class="fx column v-center field-wrapper"
+                    [formGroupName]="subSection.code"
+                >
+                    <div *ngIf="subSection.isVisible && !allFieldsIsHidden(subSection)" class="divider"></div>
+
+                    <ng-container *ngIf="subSection.showTitle">
+                        <div
+                            *ngIf="subSection.isVisible && !allFieldsIsHidden(subSection)"
+                            class="fx space-between sub-section-name max-width"
+                        >
+                            <div class="fx">{{ subSection.name | localizedString }}</div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="subSection.showFields">
+                        <div *ngFor="let field of subSection.fields" class="fx v-center max-width field-row">
+                            <ng-container *ngIf="field.type !== FieldType.HIDDEN && field.needShow">
+                                <div class="fx v-center col-1">
+                                    <span
+                                        >{{ field.name | localizedString }}
+                                        {{ field.isRequired ? "*" : "" }}</span
+                                    >
+                                    <hse-icon
+                                        *ngIf="field.hint"
+                                        class="tooltip-icon"
+                                        name="form-tooltip"
+                                        matTooltip="{{ field.hint }}"
+                                        matTooltipPosition="right"
+                                        matTooltipClass="form-hint"
+                                    ></hse-icon>
+                                </div>
+                                <div class="col-2 max-width">
+                                    <hse-input
+                                        *ngIf="field.type === FieldType.INPUT"
+                                        [formControlName]="field.code"
+                                        [tabIndex]="1"
+                                    ></hse-input>
+
+                                    <hse-multi-select
+                                        *ngIf="field.type === FieldType.REFERENCE"
+                                        [formControlName]="field.code"
+                                        [nameField]="field.selectName"
+                                        [selectedNameField]="field.selectName"
+                                        [showDepartment]="field.showDepartment"
+                                        [code]="field.code"
+                                        [collection]="field.referenceCollection"
+                                        [isMulti]="field.isMulti"
+                                        [isLazyCollection]="field.isLazyCollection"
+                                        [tabIndex]="1"
+                                        (searchValueChange)="loadLazyReference(field, $event)"
+                                    ></hse-multi-select>
+
+                                    <hse-multi-select
+                                        *ngIf="field.type === FieldType.ENUM"
+                                        [formControlName]="field.code"
+                                        [code]="field.code"
+                                        [collection]="field.enumCollection"
+                                        [showSearchInput]="false"
+                                        [isMulti]="field.isMulti"
+                                        [tabIndex]="1"
+                                    ></hse-multi-select>
+
+                                    <hse-textarea
+                                        *ngIf="field.type === FieldType.TEXTAREA"
+                                        [formControlName]="field.code"
+                                        [tabIndex]="1"
+                                    ></hse-textarea>
+
+                                    <hse-slide-toggle
+                                        *ngIf="field.type === FieldType.BOOLEAN"
+                                        [formControlName]="field.code"
+                                        [tabIndex]="1"
+                                    ></hse-slide-toggle>
+
+                                    <hse-file-upload
+                                        *ngIf="field.type === FieldType.FILE"
+                                        [formControlName]="field.code"
+                                        [code]="field.code"
+                                        [requiredFileType]="field.mask"
+                                        [tabIndex]="1"
+                                        [fileName]="field.fileName"
+                                        (uploadFile)="fileUpload($event)"
+                                        (deleteFile)="fileDelete($event)"
+                                    ></hse-file-upload>
+
+                                    <hse-date-picker
+                                        *ngIf="field.type === FieldType.DATE"
+                                        [minDateInput]="field.minDate"
+                                        [formControlName]="field.code"
+                                        [tabIndex]="1"
+                                    ></hse-date-picker>
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div *ngIf="subSection.isMulti" class="fx v-center max-width field-row">
+                            <div class="fx v-center col-1">
+                                <div class="max-width">
+                                    <button
+                                        class="btn btn-secondary btn-large max-width"
+                                        (click)="removeSubSection(subSection)"
+                                    >
+                                        Удалить
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr *ngIf="subSection.isVisible && !allFieldsIsHidden(subSection) && !last" />
+                    </ng-container>
+                    <ng-container *ngIf="subSection.showButton">
+                        <div
+                            *ngIf="subSection.isMulti"
+                            class="btn btn-blue-transparent btn-add-section"
+                            (click)="addSubSection(subSection)"
+                        >
+                            <hse-icon name="plus24" class="pointer"></hse-icon>
+                            <span>Добавить</span>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </form>
+        <!-- </mat-tab-group> -->
+    </div>
+
+    <!-- <div class="fx h-center" style="margin-top: 16px">
+        <button class="btn" (click)="debug()">DEBUG</button>
+        <pre style="white-space: break-spaces">
+    {{ savedEntity | json }}
+  </pre
+        >
+    </div> -->
+</div>

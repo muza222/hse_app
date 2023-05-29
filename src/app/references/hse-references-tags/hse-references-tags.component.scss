@@ -1,0 +1,103 @@
+@import "src/styles/variables";
+
+.references-layout {
+  padding: 0 48px 40px;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.add-guide-btn {
+  margin-bottom: 24px;
+  max-width: 114px;
+  font-size: 14px;
+  height: 40px;
+}
+
+.references-table::ng-deep {
+  border: 1px solid $color-grey-morn-2;
+  overflow-x: auto;
+  border-radius: 8px;
+  th.mat-header-cell {
+    padding: 16px 32px;
+    background-color: $color-brand-5;
+    color: $color-grey-dusk-1;
+    font-size: 16px;
+    line-height: 20px;
+    font-family: $hse-font-family-alt-lt;
+    font-weight: 600;
+    &:not(:first-child) {
+      border-left: 1px solid $color-grey-morn-2;
+    }
+  }
+
+  th.mat-sort-header {
+    cursor: pointer;
+  }
+
+  th.mat-column-document_link {
+    text-align: center;
+  }
+
+  td.mat-cell{
+    padding: 16px 32px;
+    min-width: 240px;
+    font-family: $hse-font-family;
+    font-size: 18px;
+    &:not(:first-child) {
+      border-left: 1px solid $color-grey-morn-2;
+    }
+  }
+
+  tbody {
+    .mat-row:nth-child(even) {
+      background: $color-grey-morn-5;
+    }
+  }
+
+  td.mat-cell:not(.mat-column-name) {
+    text-align: center;
+  }
+
+  thead>tr:first-child th:first-child {
+    border-top-left-radius: 8px
+  }
+
+  thead>tr:first-child th:last-child {
+    border-top-right-radius: 8px
+  }
+
+  tbody>tr:last-child td:first-child {
+    border-bottom-left-radius: 8px
+  }
+
+  tbody>tr:last-child td:last-child {
+    border-bottom-right-radius: 8px
+  }
+
+  td.mat-column-actions {
+    display: flex;
+    gap: 16px;
+    padding: 16px 20px;
+    min-width: 80px;
+    cursor: pointer;
+  }
+}
+
+.table-inner {
+  overflow: auto;
+  max-height: calc(100vh - 450px);
+}
+
+.action-items {
+  display: flex;
+  gap: 16px;
+}
+
+.action-item {
+  color: $color-grey-dusk-1;
+  transition: color .3s ease;
+  &:hover {
+    color: $color-brand-1;
+  }
+}

@@ -1,0 +1,17 @@
+<div class="hse-textarea__container" [style.width.px]="width">
+  <label for="{{textareaId}}" class="hse-textarea__label">
+    <textarea id="{{textareaId}}"
+              #textarea
+              class="hse-textarea__textarea"
+              [class.hse-textarea__textarea_size_small]="small"
+              [class.hse-textarea__textarea_rounded]="rounded"
+              [(ngModel)]="model"
+              [tabIndex]="tabIndex"
+              (focus)="emitFocusEvent()"
+              (blur)="emitBlurEvent()"
+              [disabled]="disabled"
+              [placeholder]="placeholder"
+              hseAutoHeight>
+    </textarea>
+  </label>
+</div>

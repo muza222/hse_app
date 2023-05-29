@@ -1,0 +1,66 @@
+@import "variables";
+
+.file-input {
+  display: none;
+}
+
+.file-upload {
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  border: none;
+  background-color: $color-base-white;
+  transition: background-color .3s ease;
+
+  &:hover {
+    background-color: $color-brand-5;
+  }
+
+  & > div:first-child {
+    color: $color-brand-1;
+  }
+
+  & > div:last-child {
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::ng-deep svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  ::ng-deep hse-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.file-name {
+  margin-left: 8px;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.upload-container {
+  max-width: fit-content;
+}
+
+.hint {
+  font-size: 12px;
+  line-height: 16px;
+  color: $color-grey-dusk-1;
+}
+
+.upload-container.error {
+  .file-upload {
+    background-color: $color-system-error-light;
+  }
+  .hint {
+    color: $color-system-error-1;
+  }
+}

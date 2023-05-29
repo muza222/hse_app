@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'HSE Sans';
+  src: url('HSESans-Thin.eot');
+  src: url('HSESans-Thin.eot?#iefix') format('embedded-opentype'), url('HSESans-Thin.woff2') format('woff2'),
+    url('HSESans-Thin.woff') format('woff'), url('HSESans-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HSE Sans';
+  src: url('HSESans-Regular.eot');
+  src: url('HSESans-Regular.eot?#iefix') format('embedded-opentype'), url('HSESans-Regular.woff2') format('woff2'),
+    url('HSESans-Regular.woff') format('woff'), url('HSESans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HSE Sans';
+  src: url('HSESans-Black.eot');
+  src: url('HSESans-Black.eot?#iefix') format('embedded-opentype'), url('HSESans-Black.woff2') format('woff2'),
+    url('HSESans-Black.woff') format('woff'), url('HSESans-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}

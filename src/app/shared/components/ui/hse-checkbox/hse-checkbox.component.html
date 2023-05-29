@@ -1,0 +1,14 @@
+<div class="checkbox max-width"
+     [class.checkbox_redesigned]="redesigned"
+     [class.checkbox__round]="type === 'round'"
+     [class.checkbox__small]="type === 'small'">
+  <input type="checkbox"
+         id="checkbox-{{ checkboxId }}"
+         [(ngModel)]="model"
+         [disabled]="disabled">
+
+  <label class="fx v-center label"
+         for="checkbox-{{ checkboxId }}">
+    <ng-content></ng-content>
+  </label>
+</div>

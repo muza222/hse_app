@@ -1,0 +1,34 @@
+<div class="hse-pagination fx v-center">
+  <hse-select
+    [collection]="selectCollection"
+    [(ngModel)]="selectModel.id"
+    (ngModelChange)="onChangeValue($event)"
+    [placeholder]="'COMMON.ENT_PER_VIEW' | translate"
+    [disabled]="false"
+    [width]="'200'"
+    [withPlaceholder]="true"
+  ></hse-select>
+  <!--<div class="page-switch fx fx-1 h-center">
+    <div class="page-button fx v-center" (click)="prevPage()">
+      <hse-icon name="arrow-keyboard-right" class="arrow-left"
+                    [matTooltip]="'COMMON.PREV_PAGE' | translate"></hse-icon>
+    </div>
+
+    &lt;!&ndash;НОМЕРА СТРАНИЦ&ndash;&gt;
+    <div class="fx pages-container">
+      <button *ngFor="let sheet of pagesToShow"
+              (click)="setPage(sheet)"
+              class="pages fx h-center v-center"
+              [ngClass]="{
+                'selected': page === sheet,
+                'dots': sheet === '...'
+            }">{{sheet}}</button>
+    </div>
+    &lt;!&ndash;НОМЕРА СТРАНИЦ КОНЕЦ&ndash;&gt;
+
+    <div class="page-button fx v-center" (click)="nextPage()">
+      <hse-icon name="arrow-keyboard-left"
+                    [matTooltip]="'COMMON.NEXT_PAGE' | translate"></hse-icon>
+    </div>
+  </div>-->
+</div>

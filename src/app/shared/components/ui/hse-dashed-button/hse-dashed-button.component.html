@@ -1,0 +1,8 @@
+<button class="dashed-button"
+        [class.dashed-button_small]="size === 'small'"
+        [class.dashed-button_fill-size]="fillSize"
+        [style.width]="width"
+        [disabled]="disabled"
+        (click)="clickHandle()">
+  <ng-content></ng-content>
+</button>

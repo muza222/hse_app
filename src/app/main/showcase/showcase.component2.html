@@ -1,0 +1,92 @@
+<div class="showcase-header">
+  <div>
+    <div class="showcase-filters">
+      <ng-template [hseIsAuth]="false">
+        <div class="showcase-filter">
+          <div class="showcase-filter-title">{{ 'COMMON.SHOW_RELEVANT' | translate}}</div>
+          <mat-slide-toggle class="showcase-filter-toggle"></mat-slide-toggle>
+        </div>
+      </ng-template>
+      <ng-template [hseIsAuth]="true">
+        <div class="showcase-filter">
+          <div class="showcase-filter-title">{{ 'COMMON.SHOW_SUITABLE' | translate}}</div>
+          <mat-slide-toggle class="showcase-filter-toggle"></mat-slide-toggle>
+        </div>
+        <div class="showcase-filter">
+          <div class="showcase-filter-title">{{ 'COMMON.ON_MY_CAMPUS' | translate}}</div>
+          <mat-slide-toggle class="showcase-filter-toggle"></mat-slide-toggle>
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+</div>
+
+<div class="showcase-layout">
+  <div class="fair-layout">
+    <div class="fair-container">
+      <div class="fair-card" *ngFor="let eppItem of eppList">
+        <div class="fair-card-head">
+          <img class="fair-card-img" src="../../../assets/images/default-card-bg.png" alt="pte-img">
+          <div class="fair-card-type-box">
+            <div class="fair-card-type">{{eppItem.type | localizedString}}</div>
+          </div>
+        </div>
+        <div class="fair-card-body">
+          <div class="fair-card-body-top">
+            <div class="fair-card-header">
+              <div class="fair-card-status">{{eppItem.status | localizedString}}</div>
+              <div class="fair-card-actions">
+                <a href="">
+                  <hse-icon name="arrow-link"></hse-icon>
+                </a>
+                <a href="">
+                  <hse-icon name="print"></hse-icon>
+                </a>
+              </div>
+            </div>
+            <div class="fair-card-title">{{eppItem.name | localizedString}}</div>
+            <div class="fair-card-supervisor">Руководитель: {{eppItem.supervisorParsed.fio | localizedString}}
+            </div>
+            <div class="fair-card-tags">
+              <div class="fair-card-tag" *ngFor="let tag of eppItem.tagsParsed">{{tag.name | localizedString}}</div>
+            </div>
+          </div>
+
+
+          <div class="fair-card-body-bottom">
+            <div class="fair-card-info">
+              <div class="fair-card-info-item">
+                <div class="fair-card-info-item-title">Свободных мест:</div>
+                <div class="fair-card-info-item-count">
+<!--                  <div>{{eppItem.vacanciesFree}}</div>-->
+                  <span>из</span>
+<!--                  <div>{{eppItem.vacanciesAll}}</div>-->
+                </div>
+              </div>
+              <div class="fair-card-info-item">
+                <div class="fair-card-info-item-title">Кредитов на одно место:</div>
+                <div class="fair-card-info-item-count">
+<!--                  <div>{{eppItem.laborIntensityOnVacancy}}</div>-->
+                </div>
+              </div>
+            </div>
+            <div class="fair-card-footer" *hseIsAuth="true">
+              <button class="btn btn-primary fair-card-btn">Принять участие</button>
+              <div class="fair-card-info-date">
+                <div class="fair-card-info-date-num">{{eppItem.endDateApplication | date: 'dd.MM.yyyy'}}</div>
+                <div class="fair-card-info-date-status">завершение приёма заявок</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fair-pagination">
+      <hse-pagination
+        [totalPages]="15" [page]="1" [perPage]="1">
+      </hse-pagination>
+    </div>
+  </div>
+
+</div>

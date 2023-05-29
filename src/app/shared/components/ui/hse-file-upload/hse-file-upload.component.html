@@ -1,0 +1,17 @@
+<div class="upload-container">
+  <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload [accept]="requiredFileType">
+  <button class="btn btn-secondary file-upload">
+    <div class="fx v-center" (click)="fileUpload.click()">
+      <hse-icon name="clip"></hse-icon>
+      <span class="file-name">{{fileNameInner || "COMMON.ATTACH_FILE" | translate}}</span>
+    </div>
+    <div>
+      <hse-icon name="close" *ngIf="fileNameInner !== ''" (click)="cancelUpload()"></hse-icon>
+    </div>
+  </button>
+  <div class="progress">
+    <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress" *ngIf="uploadProgress">
+    </mat-progress-bar>
+  </div>
+  <div class="hint">Поддерживаемые форматы {{requiredFileType}}. Размер файла не должен превышать 5 МВ.</div>
+</div>

@@ -1,0 +1,74 @@
+@import "variables";
+:host {
+  display: block;
+}
+
+.hse-pagination {
+  * {
+    user-select: none;
+    outline: none;
+  }
+
+  .per-page-select {
+    margin-right: 20px;
+  }
+
+  .page-switch {
+    app-kit-icon {
+      margin: 0 4px;
+      width: 15px;
+    }
+  }
+
+  .pages, .page-button {
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-family: $hse-font-family-alt-lt;
+    font-weight: 600;
+    transition: all .3s ease;
+
+    &:not(.selected):hover {
+      background: #edeff3;
+      color: #0044b0;
+    }
+  }
+
+  .selected {
+    background: #0050cf;
+    color: #fff;
+  }
+
+  .pages:not(:last-child) {
+    margin-right: 4px;
+  }
+
+
+  .page-button {
+    width: auto;
+    padding: 0 8px;
+
+    &.first-page {
+      border-right: 2px solid #eeeeee;
+    }
+
+    &.last-page {
+      border-left: 2px solid #eeeeee;
+    }
+  }
+
+
+  .dots {
+    cursor: default !important;
+  }
+
+  .pages-container {
+    margin-right: 4px;
+    margin-left: 4px;
+  }
+}
+

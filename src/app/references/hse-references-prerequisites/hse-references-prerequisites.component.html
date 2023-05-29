@@ -1,0 +1,44 @@
+<div class="references-layout">
+  <button class="btn btn-primary add-guide-btn" mat-button (click)="addElement(createWords)">Добавить</button>
+  <div class="table-wrap">
+    <div class="table-inner">
+      <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+             class="references-table" tableScroll>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="ru">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by ru">
+            {{ 'REFERENCES.PREREQUISITES_HEADER_RU' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.name.ru}} </td>
+        </ng-container>
+
+        <!-- Type Column -->
+        <ng-container matColumnDef="en">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by en">
+            {{ 'REFERENCES.PREREQUISITES_HEADER_EN' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.name.en}} </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element" id="{{element.actions}}">
+            <div class="action-items">
+              <div class="action-item">
+                <hse-icon name="ref-update" [matTooltip]=" 'REFERENCES.UPDATE' | translate " (click)="updateElement(element, updateWords)"></hse-icon>
+              </div>
+              <div class="action-item">
+                <hse-icon name="ref-remove" [matTooltip]=" 'REFERENCES.REMOVE' | translate " (click)="removeElement(this.route, element)"></hse-icon>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</div>

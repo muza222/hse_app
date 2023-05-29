@@ -1,0 +1,98 @@
+<!--<div *ngIf="!disabled">-->
+  <div #selectHeader
+       [matMenuTriggerFor]="disabled ? null : menu"
+       class="fx v-center single-select-header"
+       [class.active]="showOptionsList"
+       [class.disabled]="disabled"
+       (menuClosed)="optionListClosed()"
+       (menuOpened)="optionListOpened()">
+
+    <!--<div *ngIf="disabled" class="disabler"></div>-->
+
+    <div *ngIf="!collectionCopy || collectionCopy?.length === 0"
+         class="max-width">
+      {{ placeholder }}
+    </div>
+
+    <div *ngIf="collectionCopy?.length > 0" class="fx-1 max-width label-container">
+      <ng-container *ngIf="checkedItems.length > 0">
+        <span *ngFor="let item of checkedItems"
+              class="fx-inline fx v-center h-center label">
+        <span>{{ item[selectedNameField] | localizedString }}</span>
+        <hse-icon name="cross"
+                      class="remove-item"
+                      (click)="uncheckItem($event, item)"></hse-icon>
+      </span>
+      </ng-container>
+
+      <div *ngIf="checkedItems.length === 0"
+           class="fx v-center max-height not-selected">
+        {{ placeholder }}
+      </div>
+    </div>
+
+    <div *ngIf="checkedItemsCount"
+         class="fx v-center h-center counter">
+      {{ checkedItemsCount }}
+    </div>
+
+    <hse-icon name="arrow-dropdown"
+                  class="select-arrow"></hse-icon>
+  </div>
+
+  <mat-menu #menu
+            [overlapTrigger]="false"
+            [xPosition]="'after'"
+            [yPosition]="'below'"
+            class="single-select-autocomplete-options-list {{dropdownClassName}}">
+
+    <div class="items-container"
+         (click)="$event.stopPropagation()">
+
+      <input #inputElement
+             *ngIf="showSearchInput"
+             type="text"
+             [(ngModel)]="searchValue"
+             [placeholder]="'COMMON.SEARCH' | translate"
+             (ngModelChange)="searchValueChanged.next($event)"
+             class="single-select-input">
+
+      <div *ngFor="let item of filteredCollection"
+           class="fx v-center menu-item"
+           mat-menu-item>
+
+        <ng-container *ngIf="isMulti">
+          <hse-checkbox [(ngModel)]="item.checked"
+                        [disabled]="item.disabled"
+                        [type]="'small'"
+                        (ngModelChange)="checkItem()">
+            <span [innerHTML]="item[nameField] | localizedString"></span>
+          </hse-checkbox>
+        </ng-container>
+
+        <ng-container *ngIf="!isMulti">
+          <hse-radio-button [value]="item[idField]"
+                            [name]="code"
+                            [small]="true"
+                            (ngModelChange)="checkSingleItem(item)"
+                            [(ngModel)]="item.checked">
+            <div *ngIf="!showDepartment" [innerHTML]="item[nameField] | localizedString"></div>
+            <div *ngIf="showDepartment">{{item.fio | localizedString}} ({{ item.unit.name | localizedString}})</div>
+          </hse-radio-button>
+        </ng-container>
+
+
+      </div>
+    </div>
+  </mat-menu>
+<!--</div>-->
+
+<!--<div *ngIf="disabled"-->
+<!--     class="fx v-center space-between single-select-header single-select-header_disabled">-->
+<!---->
+<!--  <div>-->
+<!--    {{ placeholder }}-->
+<!--  </div>-->
+<!---->
+<!--  <hse-icon name="arrow-dropdown" class="select-arrow"></hse-icon>-->
+<!--</div>-->

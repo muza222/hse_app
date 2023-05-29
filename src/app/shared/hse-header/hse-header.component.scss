@@ -1,0 +1,201 @@
+@import "variables";
+
+:host {
+  height: 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $color-base-white;
+  border-bottom: 1px solid $color-grey-morn-3;
+  padding: 0 3.375rem 0 1.25rem;
+}
+
+.header-placement {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  margin-left: 0.75rem;
+
+  a {
+    opacity: 1;
+    transition: opacity .3s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+.hse-header-title {
+  margin-left: 2rem;
+  font-family: $hse-font-family-alt-lt;
+  font-size: .875rem;
+  font-weight: 600;
+  color: $color-grey-dusk-2;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  & > *:not(:last-child) {
+    position: relative;
+    &::after {
+      position: absolute;
+      content: '';
+      right: -8px;
+      width: 1px;
+      height: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: $color-grey-morn-3;
+    }
+  }
+  ::ng-deep .mat-button {
+    padding: 0;
+    min-width: unset;
+    line-height: unset;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.header-sign-in {
+  font-size: 14px;
+}
+
+.switch-lang-btn {
+  border-radius: 0.25rem;
+  font-family: HSE Sans, sans-serif;
+  font-size: 16px;
+  line-height: 1.25rem;
+  padding: 0.625rem 0.75rem;
+  box-shadow: none;
+  text-align: left;
+  width: 100%;
+  border: none;
+  height: unset;
+
+  &:hover {
+    background-color: #edeff3;
+  }
+}
+
+.switch-lang-btn-selected {
+  background-color: #0050cf;
+  border-color: #0050cf;
+  color: #fff;
+
+  &:hover {
+    background-color: #002d6e;
+  }
+}
+
+::ng-deep .switch-lang-dropdown {
+  min-width: unset !important;
+  max-width: unset !important;
+  max-height: unset !important;
+  min-height: unset !important;
+  overflow: auto !important;
+  outline: 0 !important;
+  position: relative !important;
+  padding: 0.5rem;
+  box-shadow: 0 1px 12px #6a7a981f;
+  border-radius: 0.25rem;
+
+  .mat-menu-content:not(:empty) {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+::ng-deep .user-info-dropdown {
+  padding: 0.75rem;
+  box-shadow: 0 1px 12px rgba(106, 122, 152, 0.12);
+  border-radius: 0.25rem;
+  min-width: 320px !important;
+  box-sizing: border-box;
+  .mat-menu-content:not(:empty) {
+    padding: 0;
+  }
+  .user-info-dropdown-box:not(:last-child) {
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid $color-grey-dusk-6;
+  }
+  .btn-logout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 12px;
+    height: 40px;
+    font-family: $hse-font-family;
+    font-weight: 400;
+    span {
+      color: $color-base-black;
+    }
+
+    &:hover {
+      color: $color-brand-1;
+      border: 1px solid transparent;
+      transition: color .3s ease;
+      span {
+        color: $color-brand-1;
+      }
+    }
+  }
+  .user-info-dropdown-name {
+    line-height: 20px;
+    padding: 0 12px;
+  }
+  .user-info-dropdown-role-title {
+    padding: 16px 12px 4px;
+    font-family: $hse-font-family;
+    color: $color-grey-dusk-3;
+    line-height: 20px;
+  }
+  .user-info-dropdown-role {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 0.25rem;
+    height: 40px;
+    transition: background-color .3s ease, color .3s ease;
+
+    &:hover {
+      background-color: $color-brand-2;
+      color: $color-brand-5;
+    }
+  }
+  .user-info-dropdown-role.active {
+    color: $color-base-white;
+    background-color: $color-brand-1;
+  }
+  .user-info-dropdown-link {
+    padding: 0 12px;
+    color: $color-base-black;
+    &:hover {
+      color: $color-brand-1;
+    }
+  }
+}
+.header-controls-link {
+  color: $color-grey-dusk-1;
+
+  &:hover {
+    color: $color-brand-1;
+  }
+}
+
+.header-controls-switch-lang::ng-deep .mat-button-wrapper{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+}

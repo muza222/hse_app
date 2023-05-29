@@ -1,0 +1,119 @@
+@import "variables";
+
+.checkbox {
+  display: inline-block;
+
+  input[type=checkbox] {
+    display: none;
+
+    & + label {
+      user-select: none;
+
+      &::before {
+        content: '';
+        box-sizing: border-box;
+        min-width: 24px;
+        min-height: 24px;
+        width: 24px;
+        height: 24px;
+        border: 1px solid $color-grey-dusk-3;
+        border-radius: 4px;
+        background-color: $color-base-white;
+        transition: background-color .3s ease, border-color .3s ease;
+      }
+
+      &:hover {
+        cursor: pointer;
+
+        &::before {
+          border-color: $color-brand-1;
+        }
+      }
+    }
+
+    &:checked + label {
+      &::before {
+        color: $color-base-white;
+        border-color: transparent;
+        background-color: $color-brand-1;
+        background-image: url("~src/assets/icons/checkbox-checked.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+
+    &:checked:disabled + label {
+      cursor: default;
+      color: $color-grey-dusk-4;
+
+      &::before {
+        background-image: url("~src/assets/icons/checkbox-checked-disabled.svg");
+        background-color: $color-grey-morn-2;
+      }
+    }
+
+    &:disabled + label {
+      cursor: default;
+      color: $color-grey-dusk-4;
+
+      &::before {
+        border-color: $color-grey-morn-1;
+        background-color: $color-grey-morn-3;
+      }
+    }
+  }
+}
+
+.checkbox_redesigned {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  input[type=checkbox] {
+    & + label {
+      height: 100%;
+    }
+
+    &:checked + label {
+      &::before {
+        background-color: $color-brand-1;
+        background-image: url("~src/assets/icons/checkbox-checked.svg");
+      }
+    }
+  }
+}
+
+.checkbox__small {
+  input[type=checkbox] {
+    & + label {
+      &::before {
+        min-width: 18px;
+        min-height: 18px;
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    &:checked+ label {
+
+    }
+  }
+}
+
+.checkbox__round {
+  input[type=checkbox] {
+    & + label {
+      &::before {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.label {
+  //max-width: fit-content;
+  gap: 8px;
+}

@@ -1,0 +1,20 @@
+<div class="fx column alert-list">
+  <div *ngFor="let alert of base.alerts; let i = index"
+       class="fx relative alert fade-in-down"
+       [class.fade-out-down]="alert.isFadeOut"
+       [class.alert__info]="alert.type === alertTypes.INFO"
+       [class.alert__error]="alert.type === alertTypes.ERROR"
+       [class.alert__success]="alert.type === alertTypes.SUCCESS">
+    <hse-icon [name]="alert.type"
+                  class="icon"></hse-icon>
+    <div>
+      <div class="title">{{ alert.title }}</div>
+      <div *ngIf="!alert.isHtml">{{alert.message}}</div>
+      <div *ngIf="alert.isHtml" [innerHTML]="alert.message"></div>
+    </div>
+
+    <hse-icon name="cross"
+                  class="close"
+                  (click)="removeAlert(alert)"></hse-icon>
+  </div>
+</div>

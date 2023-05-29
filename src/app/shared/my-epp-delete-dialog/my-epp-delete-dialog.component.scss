@@ -1,0 +1,53 @@
+@import "variables";
+
+::ng-deep .mat-dialog-container {
+  max-width: 745px;
+  width: 100%;
+  padding: 32px 32px 40px;
+  border-radius: 12px;
+}
+
+.hse-dialog-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+.hse-dialog-container-bottom {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+
+  .btn {
+    height: 48px;
+  }
+}
+
+.hse-dialog-container-top {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.close-container {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  color: $color-base-black;
+  transition: color .3s ease;
+
+  :hover {
+    color: $color-brand-1;
+  }
+}
+
+.hse-dialog-body {
+  font-size: 18px;
+}

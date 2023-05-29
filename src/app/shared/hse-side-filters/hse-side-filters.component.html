@@ -1,0 +1,93 @@
+<div class="side-nav-bar" [ngClass]="{ 'side-nav-bar-collapsed': !(showSideNav | async) }">
+  <div class="side-nav-bar-menu-container">
+
+    <div class="side-filters-top">
+      <div class="side-filters-header">
+        <div class="fx h-end">
+          <div class="btn btn-transparent side-filters-close">
+            <hse-icon name="close" (click)="onSidebarClose()"></hse-icon>
+          </div>
+        </div>
+        <div class="side-filters-title">Фильтры</div>
+      </div>
+
+      <div class="side-filters-content">
+        <div class="side-filters-item">
+          <div class="side-filters-item-title">Тип</div>
+          <hse-multi-select></hse-multi-select>
+        </div>
+        <div class="side-filters-item">
+          <div class="side-filters-item-title">Номер</div>
+          <hse-input></hse-input>
+        </div>
+        <div class="side-filters-item">
+          <div class="side-filters-item-title">Статус</div>
+          <hse-multi-select></hse-multi-select>
+        </div>
+        <div class="side-filters-item">
+          <div class="side-filters-item-title">Дата смены статуса</div>
+          <div class="side-filters-date-container">
+            <hse-date-picker></hse-date-picker>
+            <hse-date-picker></hse-date-picker>
+          </div>
+        </div>
+        <div class="side-filters-item">
+          <div class="side-filters-item-title">Дата старта</div>
+          <div class="side-filters-date-container">
+            <hse-date-picker></hse-date-picker>
+            <hse-date-picker></hse-date-picker>
+          </div>
+        </div>
+        <div class="side-filters-item">
+          <div class="side-filters-item-title">Дата завершения</div>
+          <div class="side-filters-date-container">
+            <hse-date-picker></hse-date-picker>
+            <hse-date-picker></hse-date-picker>
+          </div>
+        </div>
+        <div class="side-filters-item">
+          <div class="side-filters-item-title">Язык реализации</div>
+          <hse-multi-select></hse-multi-select>
+        </div>
+        <div class="side-filters-item">
+          <div class="side-filters-item-title">Подразделение-инициатор</div>
+          <hse-multi-select></hse-multi-select>
+        </div>
+        <div class="side-filters-item">
+          <div class="side-filters-item-title">Инициатор</div>
+          <hse-multi-select></hse-multi-select>
+        </div>
+        <div class="side-filters-item">
+          <div class="side-filters-item-title">Тип инициатора</div>
+          <hse-multi-select></hse-multi-select>
+        </div>
+        <div class="side-filters-item">
+          <div class="side-filters-item-title">Руководитель</div>
+          <hse-multi-select></hse-multi-select>
+        </div>
+        <div class="side-filters-item">
+          <div class="side-filters-item-title">Структурное подразделение руководителя</div>
+          <hse-multi-select></hse-multi-select>
+        </div>
+        <div class="side-filters-item">
+          <div class="side-filters-item-title">Кампус</div>
+          <hse-multi-select></hse-multi-select>
+        </div>
+        <div class="side-filters-item">
+          <div class="side-filters-item-title">Факультет</div>
+          <hse-multi-select></hse-multi-select>
+        </div>
+        <div class="side-filters-item">
+          <div class="side-filters-item-title">Образовательная программа</div>
+          <hse-multi-select></hse-multi-select>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="side-filters-bottom">
+      <button class="btn btn-primary">Применить</button>
+      <button class="btn btn-blue-transparent">Сбросить</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+@import "src/styles/variables";
+
+.status-card {
+  padding: 2px 12px;
+  font-family: $hse-font-family-alt-lt;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 36px;
+  color: $color-base-white;
+  white-space: nowrap;
+}

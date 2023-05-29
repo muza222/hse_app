@@ -1,0 +1,130 @@
+@import "variables";
+
+.radio-button {
+  display: inline-block;
+
+  input[type=radio] {
+    display: none;
+
+    & + label {
+      position: relative;
+      user-select: none;
+
+      &::before {
+        content: '';
+        box-sizing: border-box;
+        min-width: 24px;
+        min-height: 24px;
+        width: 24px;
+        height: 24px;
+        margin-right: 16px;
+        border-radius: 50%;
+        border: solid 1px #a6a8ab;
+        background: #fff;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 8px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        transform: translateY(-50%);
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &:disabled + label {
+      color: #a6a8ab;
+
+      &::before {
+        border-color: #a6a8ab;
+        background: #fff;
+      }
+
+      &::after {
+        background-color: #fff;
+      }
+
+      &:hover {
+        cursor: default;
+      }
+    }
+
+    &:checked + label {
+      &::before {
+        border-color: $color-brand-1;
+        background: $color-brand-1;
+      }
+
+      &::after {
+        background-color: #ffffff;
+      }
+    }
+
+    &:checked:disabled + label {
+      color: #a6a8ab;
+
+      &::before {
+        border-color: #a6a8ab;
+        background: #a6a8ab;
+      }
+
+      &::after {
+        background-color: #40494c;
+      }
+
+      &:hover {
+        cursor: default;
+      }
+    }
+  }
+}
+
+.radio-button__small {
+  input[type=radio] {
+    & + label {
+      &::before {
+        min-width: 18px;
+        min-height: 18px;
+        width: 18px;
+        height: 18px;
+      }
+
+      &::after {
+        left: 6px;
+        width: 6px;
+        height: 6px;
+      }
+    }
+  }
+}
+
+.radio-button__square {
+  width: initial !important;
+
+  input[type=radio] {
+    & + label {
+      width: initial !important;
+      padding: 5px 12px;
+
+      &::before {
+          display: none;
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+
+    &:checked + label {
+      font-weight: bold;
+      background: $color-brand-1;
+    }
+  }
+}

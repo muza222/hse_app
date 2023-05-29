@@ -1,0 +1,94 @@
+<div class="header-placement">
+    <a routerLink="/">
+        <hse-icon name="logo-en"></hse-icon>
+    </a>
+</div>
+<div style="padding: 16px">
+    <div class="header-controls-link">Обратиться в техническую поддержку</div>
+</div>
+<div class="header-controls">
+    <div>
+        <button
+            class="header-controls-link header-controls-switch-lang"
+            mat-button
+            [matMenuTriggerFor]="language"
+        >
+            <div>{{ lang }}</div>
+            <hse-icon name="arrow-dropdown"></hse-icon>
+            <mat-menu class="switch-lang-dropdown" #language="matMenu">
+                <div *ngFor="let lang of localeChoice.LOCALES">
+                    <button
+                        class="btn switch-lang-btn"
+                        [class.switch-lang-btn-selected]="lang?.isActive"
+                        (click)="setLanguage(lang.id)"
+                    >
+                        {{ lang.name | uppercase }}
+                    </button>
+                </div>
+            </mat-menu>
+        </button>
+        <button
+            class="header-controls-link header-controls-switch-lang"
+            mat-button
+            [matMenuTriggerFor]="role"
+        >
+            <div>{{session.activeRole.name}}</div>
+            <hse-icon name="arrow-dropdown"></hse-icon>
+            <mat-menu class="switch-lang-dropdown" #role="matMenu">
+                <div *ngFor="let role of rolesList">
+                    <button class="btn switch-lang-btn" (click)="changeRole(role)">
+                        {{ role.name }}
+                    </button>
+                </div>
+            </mat-menu>
+        </button>
+    </div>
+    <a class="header-controls-link">
+        <hse-icon name="alarm"></hse-icon>
+    </a>
+    <ng-template [hseIsAuth]="false">
+        <button class="btn btn-transparent header-sign-in" (click)="logIn()">
+            {{ "COMMON.LOG_IN" | translate }}
+        </button>
+    </ng-template>
+    <ng-template [hseIsAuth]="true">
+        <a class="header-controls-link">
+            <hse-icon name="law"></hse-icon>
+        </a>
+        <div class="header-controls-link">
+            <button mat-button [matMenuTriggerFor]="user">
+                <hse-icon name="person"></hse-icon>
+                <mat-menu class="user-info-dropdown" #user="matMenu">
+                    <div class="user-info-dropdown-box">
+                        <div class="user-info-dropdown-name">
+                            {{ session.firstname | localizedString }} {{ session.surname | localizedString }}
+                        </div>
+                    </div>
+                    <div class="user-info-dropdown-box">
+                        <div class="user-info-dropdown-role-title">
+                            {{ "COMMON.PERSONAL_CABINET" | translate }}
+                        </div>
+                        <a
+                            class="user-info-dropdown-role"
+                            *ngFor="let role of roles; let i = index"
+                            (click)="changeRole(role)"
+                            [class.active]="role.name === session.activeRole.name"
+                        >
+                            <span>{{ "ROLES." + role.name | translate }}</span>
+                            <hse-icon name="check" *ngIf="role.name === session.activeRole.name"></hse-icon>
+                        </a>
+                    </div>
+                    <div class="user-info-dropdown-box">
+                        <a class="user-info-dropdown-link" href="">{{ "COMMON.PROFILE" | translate }}</a>
+                    </div>
+                    <div class="user-info-dropdown-box">
+                        <button class="btn btn-transparent btn-logout" (click)="logOut()">
+                            <span>{{ "COMMON.LOG_OUT" | translate }}</span>
+                            <hse-icon name="exit"></hse-icon>
+                        </button>
+                    </div>
+                </mat-menu>
+            </button>
+        </div>
+    </ng-template>
+</div>

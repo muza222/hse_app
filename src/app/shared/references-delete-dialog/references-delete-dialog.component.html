@@ -1,0 +1,16 @@
+<div class="hse-dialog-container">
+  <button class="close-container" (click)="closeDialog()">
+    <hse-icon name="close"></hse-icon>
+  </button>
+  <div class="hse-dialog-container-top">
+    <div class="hse-dialog-title">{{'COMMON.ATTENTION' | translate}}</div>
+    <div class="hse-dialog-body">
+      <div>{{'DELETE.REALLY' | translate}} {{displayingWords | translate}}?</div>
+      <div>{{'DELETE.PERMANENTLY' | translate}}</div>
+    </div>
+  </div>
+  <div class="hse-dialog-container-bottom">
+    <button class="btn btn-primary" (click)="confirmDelete(data.element.id)">{{'BUTTONS.REMOVE' | translate}}</button>
+    <button class="btn btn-secondary" (click)="closeDialog()">{{'BUTTONS.CANCEL' | translate}}</button>
+  </div>
+</div>

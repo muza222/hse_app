@@ -1,0 +1,33 @@
+@import "variables";
+:host {
+  overflow: hidden;
+}
+.page-layout {
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-wrapper {
+  flex: 1 1 0;
+  display: grid;
+  grid-template-areas: "sidenav content";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr;
+  overflow: hidden;
+}
+
+.main-layout {
+  grid-column: content;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  min-height: 1px;
+  overflow-x: hidden;
+}
+
+.footer-layout {
+  background-color: $color-brand-dark;
+}
